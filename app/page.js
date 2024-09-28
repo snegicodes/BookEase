@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ArrowRight, Calendar, Clock, LinkIcon } from "lucide-react";
-// import TestimonialsCarousel from "@/components/testimonials";
+import TestimonialsCarousel from "@/components/testimonials";
 import Link from "next/link";
 
 const features = [
@@ -100,7 +100,7 @@ const Home = () => {
         <h2 className="text-3xl font-bold text-center mb-12 text-black">
           What Our Users Say
         </h2>
-        {/* <TestimonialsCarousel /> */}
+        <TestimonialsCarousel />
       </div>
 
       {/* How It Works Section */}
