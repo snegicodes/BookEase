@@ -5,6 +5,7 @@ import { clerkClient } from "@clerk/nextjs/server";
 import { google } from "googleapis";
 
 export async function createBooking(bookingData) {
+  console.log('bookingData', bookingData)
   try {
     // Fetch the event and its creator
     const event = await db.event.findUnique({
@@ -53,6 +54,16 @@ export async function createBooking(bookingData) {
     const meetLink = meetResponse.data.hangoutLink;
     const googleEventId = meetResponse.data.id;
 
+
+    const startTime = new Date(bookingData.startTime);
+    const endTime = new Date(bookingData.endTime);
+
+    startTime.setHours(startTime.getHours() + 5);
+    startTime.setMinutes(startTime.getMinutes() + 30);
+
+    endTime.setHours(endTime.getHours() + 5);
+    endTime.setMinutes(endTime.getMinutes() + 30);
+
     // Create booking in database
     const booking = await db.booking.create({
       data: {
@@ -60,8 +71,8 @@ export async function createBooking(bookingData) {
         userId: event.userId,
         name: bookingData.name,
         email: bookingData.email,
-        startTime: bookingData.startTime,
-        endTime: bookingData.endTime,
+        startTime: startTime.toISOString(),
+        endTime: endTime.toISOString(),
         additionalInfo: bookingData.additionalInfo,
         meetLink,
         googleEventId,
