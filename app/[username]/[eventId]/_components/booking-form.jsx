@@ -51,7 +51,7 @@ export default function BookingForm({ event, availability }) {
     const startTime = new Date(
       `${format(selectedDate, "yyyy-MM-dd")}T${selectedTime}`
     );
-    const endTime = new Date(startTime.getTime() + event.duration * 60000);
+    const endTime = new Date(startTime.getTime() + event.duration * 60000) ;
 
     const bookingData = {
       eventId: event.id,
