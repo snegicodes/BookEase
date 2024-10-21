@@ -68,16 +68,22 @@ export default function DashboardPage() {
               <div>
                 {upcomingMeetings && upcomingMeetings?.length > 0 ? (
                   <ul className="list-disc pl-5">
-                    {upcomingMeetings?.map((meeting) => (
+                    {upcomingMeetings?.map((meeting) => 
+                    {
+                      const adjustedTime = new Date(meeting.startTime);
+                      adjustedTime.setHours(adjustedTime.getHours() - 5);
+                      adjustedTime.setMinutes(adjustedTime.getMinutes() - 30);
+                      return(
                       <li key={meeting.id}>
                         {meeting.event.title} on{" "}
                         {format(
-                          new Date(meeting.startTime),
+                          adjustedTime,
                           "MMM d, yyyy h:mm a"
                         )}{" "}
                         with {meeting.name}
                       </li>
-                    ))}
+                    )}
+                    )}
                   </ul>
                 ) : (
                   <p>No upcoming meetings</p>
